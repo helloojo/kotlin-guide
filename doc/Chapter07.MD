@@ -760,3 +760,41 @@ FileReader("data.bin").buffered().use {
     for (line in it.lineSequence()) println(line)
 }
 ```
+
+* Reader 인스턴스는 forEachLine(), useLines() 메서드 이용해 줄 단위 접근 가능
+* copyTo() 함수를 사용해 다른 스트림으로 데이터 전달도 가능
+* use() 함수를 이용하면 명시적으로 정리해야 하는 스트림, 다른 자원을 안전하게 처리할 수 있음
+    * Closable을 구현해야 호출 가능
+
+### 7.2.2 스트림 생성
+
+* bufferedReaders(), bufferedWriter() 확장 함수를 이용해 BufferedReader, BufferedWriter 인스턴스 쉽게 생성 가능
+    * reader(), writer() 확장 함수도 존재함
+* printWriter() 함수는 PrintWriter 인스턴스 반환
+* 각 reader, writer 함수에 문자 집합 지정 가능
+* inputStream(), outputStream()을 통해서는 이진 데이터 처리 가능
+* 다양한 형식의 {}InputStream(), {}OutputStream() 확장 함수 제공
+* Reader, Writer 클래스는 buffered() 함수로 버퍼를 제공하기도 한다.
+
+### 7.2.3 URL 유틸리티
+
+* URL 주소로부터 데이터를 읽어오는 함수 제공
+    * fun URL.readText(): String
+    * fun URL.readBytes(): ByteArray
+
+### 7.2.4 파일 콘텐츠 접근하기
+
+* 코틀린 표준 라이브러리는 파일 콘텐츠를 읽을 수 있는 함수 제공
+* readText(), readLines(), writeText(), appendText() 등 제공
+* 이진 파일은 readBytes(), writeBytes(), appendBytes() 등 함수 제공
+* forEachLines(), useLines()로 파일을 부분씩 읽을 수도 있음
+
+### 7.2.5 파일 시스템 유틸리티
+
+* deleteRecursively()
+    * 파일, 디렉터리를 하위 파일까지 쉽게 삭제 가능
+* copyTo()
+    * 파일의 내용을 다른 파일로 복사하고 복사본을 가리키는 객체 반환
+    * copyRecursively()로 디렉터리 단위 복사 가능
+* walk()
+  * 깊이 우선 디렉터리 구조 순회
